@@ -10,13 +10,13 @@
     function conectarDB() {
         const abrirConexion = window.indexedDB.open('crm', 1);
 
-        abrirConexion.onerror = function() {
+        abrirConexion.onerror = () => {
             console.log('hubo un error');
         };
-        abrirConexion.onsuccess = function() {
+        abrirConexion.onsuccess = () => {
             DB = abrirConexion.result;
         };
-    }
+    };
 
     function validarCliente(e) {
         e.preventDefault();
@@ -27,7 +27,6 @@
 
         if(nombre === '' || email === '' || telefono === '' || empresa === '') {
             imprimirAlerta('Todos los campos son obligatorios', 'error');
-
             return;
         }
 
@@ -54,10 +53,10 @@
         transaction.oncomplete = () => {
             imprimirAlerta('Agregado correctamente');
 
-            setInterval(() => {
+            setTimeout(() => {
                 window.location.href = 'index.html';
-            }, 2000);
-        }
+            }, 1000);
+        };
     }
 
     function imprimirAlerta(mensaje, tipo) {
